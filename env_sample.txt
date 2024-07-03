@@ -1,0 +1,9 @@
+#Secret Keys
+
+#OpenAI
+OPENAI_KEY=""
+
+#LangFuse
+LANGFUSE_SECRET_KEY=""
+LANGFUSE_PUBLIC_KEY=""
+LANGFUSE_HOST=""

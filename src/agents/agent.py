@@ -12,6 +12,13 @@ from langchain.agents import Tool
 from src.tools.pandasTool import tool
 import os
 
+store = {}
+
+def get_session_history(session_id: str) -> BaseChatMessageHistory:
+    if session_id not in store:
+        store[session_id] = ChatMessageHistory()
+    return store[session_id]
+
 def get_agent():
     
     tools = [tool]
@@ -49,12 +56,7 @@ def get_agent():
 
 
     agent = create_openai_tools_agent(tools=tools, llm=llm, prompt=chat_template)
-    store = {}
-
-    def get_session_history(session_id: str) -> BaseChatMessageHistory:
-        if session_id not in store:
-            store[session_id] = ChatMessageHistory()
-        return store[session_id]
+    
     
     runnable_agent = RunnableWithMessageHistory(
         AgentExecutor(agent=agent, tools=tools, verbose=True),
